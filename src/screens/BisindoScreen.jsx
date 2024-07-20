@@ -10,6 +10,23 @@ function CaptureScreen() {
   const [cameraActive, setCameraActive] = useState(false);
   const [numberOfCameras, setNumberOfCameras] = useState(0);
   const canvasRef = useRef(null);
+  const [aspectRatio, setAspectRatio] = useState(16 / 9);
+
+  // change aspect ratio
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 600) {
+        setAspectRatio(4 / 5); // Atur rasio aspek untuk layar kecil
+      } else {
+        setAspectRatio(16 / 9); // Atur rasio aspek untuk layar besar
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Setel rasio aspek saat komponen di-mount
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -161,7 +178,7 @@ function CaptureScreen() {
             <Camera
               ref={camera}
               numberOfCamerasCallback={setNumberOfCameras}
-              aspectRatio={16 / 9}
+              aspectRatio={aspectRatio}
               videoConstraints={{ facingMode: "environment" }}
               className="w-full h-full object-cover rounded-lg"
             />
