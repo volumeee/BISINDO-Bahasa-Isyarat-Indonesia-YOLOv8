@@ -6,7 +6,9 @@ import logoImage from "../assets/logo.png";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const handleMenuItemClick = () => {
+    setMobileMenuOpen(false);
+  };
   return (
     <header className="bg-white fixed top-0 left-0 w-full z-50 shadow-md">
       <nav
@@ -59,7 +61,11 @@ function Navbar() {
         </div>
       </nav>
       {/* Mobile menu */}
-      <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+      <Dialog
+        as="div"
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      >
         <DialogPanel
           focus="true"
           className="fixed inset-0 z-50 overflow-y-auto bg-white px-6 py-6 lg:hidden"
@@ -87,18 +93,21 @@ function Navbar() {
               <div className="space-y-2 py-6">
                 <Link
                   to="/"
+                  onClick={handleMenuItemClick}
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-medium leading-7 text-gray-900 hover:bg-gray-400/10"
                 >
                   Home
                 </Link>
                 <Link
                   to="/about"
+                  onClick={handleMenuItemClick}
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-medium leading-7 text-gray-900 hover:bg-gray-400/10"
                 >
                   About Us
                 </Link>
                 <Link
                   to="/reference"
+                  onClick={handleMenuItemClick}
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-medium leading-7 text-gray-900 hover:bg-gray-400/10"
                 >
                   Reference
@@ -107,6 +116,7 @@ function Navbar() {
               <div className="py-6">
                 <Link
                   to="/bisindo"
+                  onClick={handleMenuItemClick}
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-medium leading-6 text-gray-900 hover:bg-gray-400/10"
                 >
                   Let's Get Started

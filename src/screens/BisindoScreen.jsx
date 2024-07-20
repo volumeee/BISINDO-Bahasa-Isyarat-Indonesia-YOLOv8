@@ -1,14 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Camera } from "react-camera-pro";
 import axios from "axios";
 
 function CaptureScreen() {
   const [image, setImage] = useState(null);
-  const [result, setResult] = useState("No result yet");
+  const [result, setResult] = useState([]);
   const camera = useRef(null);
   const [cameraActive, setCameraActive] = useState(false);
   const [numberOfCameras, setNumberOfCameras] = useState(0);
+  const canvasRef = useRef(null);
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -28,7 +29,7 @@ function CaptureScreen() {
   };
 
   const takePhoto = async () => {
-    const photo = camera.current.takePhoto();
+    const photo = await camera.current.takePhoto();
     setImage(photo);
     setCameraActive(false);
     sendImageToRoboflow(photo);
@@ -55,7 +56,7 @@ function CaptureScreen() {
         );
 
         console.log("Response received from Roboflow:", response.data);
-        setResult(JSON.stringify(response.data.predictions, null, 2));
+        setResult(response.data.predictions);
       } else {
         const reader = new FileReader();
         reader.onloadend = async () => {
@@ -77,15 +78,78 @@ function CaptureScreen() {
           );
 
           console.log("Response received from Roboflow:", response.data);
-          setResult(JSON.stringify(response.data.predictions, null, 2));
+          setResult(response.data.predictions);
         };
         reader.readAsDataURL(file);
       }
     } catch (error) {
       console.error("Error sending image to Roboflow:", error);
-      setResult("Error: " + error.message);
+      setResult([]);
     }
   };
+
+  useEffect(() => {
+    if (image && result.length > 0) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+      img.src = image;
+
+      // Variabel untuk penyesuaian mudah
+      const fontSize = 40; // Ukuran font dalam piksel
+      const labelPadding = 16; // Padding di sekitar teks label dalam piksel
+      const boxColor = "purple"; // Warna untuk bounding box dan teks
+      const boxAlpha = 0.3; // Transparansi untuk bounding box
+
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        result.forEach((prediction) => {
+          const { x, y, width, height, class: label, confidence } = prediction;
+          const xMin = x - width / 2;
+          const yMin = y - height / 2;
+
+          // Set font size
+          ctx.font = `${fontSize}px Arial`;
+
+          // Draw bounding box with transparency
+          ctx.beginPath();
+          ctx.rect(xMin, yMin, width, height);
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = boxColor;
+          ctx.stroke();
+
+          // Set global alpha for transparency
+          ctx.globalAlpha = boxAlpha;
+
+          // Draw bounding box fill
+          ctx.fillStyle = boxColor;
+          ctx.fillRect(xMin, yMin, width, height);
+
+          // Reset global alpha to 1 for subsequent drawing
+          ctx.globalAlpha = 1;
+
+          // Draw label background
+          const labelText = `${label} ${Math.round(confidence * 100)}%`;
+          const textWidth = ctx.measureText(labelText).width;
+          const textHeight = fontSize;
+          ctx.fillStyle = boxColor;
+          ctx.fillRect(
+            xMin,
+            yMin - textHeight - labelPadding,
+            textWidth + 2 * labelPadding,
+            textHeight + labelPadding
+          );
+
+          // Draw label text
+          ctx.fillStyle = "white";
+          ctx.fillText(labelText, xMin + labelPadding, yMin - labelPadding);
+        });
+      };
+    }
+  }, [image, result]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-4 mt-16">
@@ -103,11 +167,17 @@ function CaptureScreen() {
             />
           </div>
         ) : image ? (
-          <img
-            src={image}
-            alt="Captured"
-            className="object-contain w-full h-full rounded-lg"
-          />
+          <>
+            <img
+              src={image}
+              alt="Captured"
+              className="object-contain w-full h-full rounded-lg hidden"
+            />
+            <canvas
+              ref={canvasRef}
+              className="object-contain w-full h-full rounded-lg"
+            />
+          </>
         ) : (
           <p className="text-gray-500">No image selected</p>
         )}
@@ -147,7 +217,7 @@ function CaptureScreen() {
       </div>
       <p className="text-lg text-white mb-2">Detection Results</p>
       <div className="text-4xl font-bold border-2 border-gray-400 p-4 rounded text-white">
-        <pre>{result}</pre>
+        <pre>{JSON.stringify(result, null, 2)}</pre>
       </div>
     </div>
   );

@@ -12,60 +12,58 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <div className="px-7 bg-gray-900 min-h-screen flex items-center justify-center">
+    <div className="bg-gray-900 min-h-screen flex items-center justify-center px-4">
       {loading ? (
-        <div className="relative isolate overflow-hidden px-10 pt-24 mt-10 pb-20 sm:px-16 lg:px-9 flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl gap-1">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-4 max-sm:mt-20 max-sm:pt-20">
           <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Komunikasi Tanpa Batas dengan Bahasa Isyarat Indonesia
             </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
+            <p className="mt-6 text-lg text-gray-300">
               BISINDO adalah platform belajar Bahasa Isyarat Indonesia dengan
               teknologi deteksi objek YOLO v8. Akses berbagai materi untuk semua
               tingkatan dan ciptakan komunikasi inklusif bersama kami.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 lg:justify-start">
+            <div className="mt-10 flex flex-col sm:flex-row items-start justify-start gap-6 max-[768px]:items-center max-[768px]:justify-center">
               <Link
                 to="/bisindo"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition ease-in-out delay-150 hover:scale-110"
+                className="bg-white text-gray-900 rounded-md px-4 py-2 text-sm font-semibold shadow-sm hover:bg-gray-100 transition-transform transform hover:scale-105"
               >
                 Get Started
               </Link>
               <Link
                 to="/about"
-                className="mt-4 sm:mt-0 text-sm font-semibold leading-6 text-white rounded-lg px-3 py-2 hover:shadow-sm hover:shadow-white duration-300"
+                className="text-sm font-semibold text-white rounded-md px-4 py-2 mt-4 sm:mt-0 hover:underline"
               >
                 Learn more <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
           <div className="w-full lg:w-1/2 mt-16 lg:mt-0">
-            <div className="animate-pulse">
-              <div className="w-full h-80 bg-gray-700 rounded-md"></div>
-            </div>
+            <div className="w-full h-80 bg-gray-700 rounded-md animate-pulse"></div>
           </div>
         </div>
       ) : (
-        <div className="relative isolate overflow-hidden px-10 pt-24 mt-10 pb-20 sm:px-16 lg:px-9 flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl gap-1">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-4  max-sm:mt-20 max-sm:pt-20">
           <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Komunikasi Tanpa Batas dengan Bahasa Isyarat Indonesia
             </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
+            <p className="mt-6 text-lg text-gray-300">
               BISINDO adalah platform belajar Bahasa Isyarat Indonesia dengan
               teknologi deteksi objek YOLO v8. Akses berbagai materi untuk semua
               tingkatan dan ciptakan komunikasi inklusif bersama kami.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 lg:justify-start">
+            <div className="mt-10 flex flex-col sm:flex-row items-start justify-start gap-6 max-[768px]:items-center max-[768px]:justify-center">
               <Link
                 to="/bisindo"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition ease-in-out delay-150 hover:scale-110"
+                className="bg-white text-gray-900 rounded-md px-4 py-2 text-sm font-semibold shadow-sm hover:bg-gray-100 transition-transform transform hover:scale-105"
               >
                 Get Started
               </Link>
               <Link
                 to="/about"
-                className="mt-4 sm:mt-0 text-sm font-semibold leading-6 text-white rounded-lg px-3 py-2 hover:shadow-sm hover:shadow-white duration-300"
+                className="text-sm font-semibold text-white rounded-md px-4 py-2 mt-4 sm:mt-0 hover:underline"
               >
                 Learn more <span aria-hidden="true">→</span>
               </Link>
@@ -75,7 +73,7 @@ export default function HomeScreen() {
             <img
               alt="App screenshot"
               src={introImage}
-              className="w-full rounded-md bg-white/5 ring-1 ring-white/10"
+              className="w-full rounded-md bg-white/10 ring-1 ring-white/10"
             />
           </div>
         </div>
