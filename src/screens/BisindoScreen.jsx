@@ -28,7 +28,7 @@ function CaptureScreen() {
   };
 
   const takePhoto = async () => {
-    const photo = await camera.current.takePhoto();
+    const photo = camera.current.takePhoto();
     setImage(photo);
     setCameraActive(false);
     sendImageToRoboflow(photo);
@@ -38,21 +38,49 @@ function CaptureScreen() {
     try {
       console.log("Sending image to Roboflow");
 
-      const formData = new FormData();
-      formData.append("image", file); // Use the file object directly
+      if (typeof file === "string") {
+        const base64String = file.replace("data:", "").replace(/^.+,/, "");
 
-      const response = await axios.post(
-        "https://detect.roboflow.com/bisindo-hiiig/2?api_key=4iTfTnpJ1cUUR9GGZvDV", // API key included in the URL
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+        const response = await axios.post(
+          "https://detect.roboflow.com/bisindo-hiiig/2",
+          base64String,
+          {
+            params: {
+              api_key: "4iTfTnpJ1cUUR9GGZvDV",
+            },
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
 
-      console.log("Response received from Roboflow:", response.data);
-      setResult(JSON.stringify(response.data.predictions, null, 2));
+        console.log("Response received from Roboflow:", response.data);
+        setResult(JSON.stringify(response.data.predictions, null, 2));
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = async () => {
+          const base64String = reader.result
+            .replace("data:", "")
+            .replace(/^.+,/, "");
+
+          const response = await axios.post(
+            "https://detect.roboflow.com/bisindo-hiiig/2",
+            base64String,
+            {
+              params: {
+                api_key: "4iTfTnpJ1cUUR9GGZvDV",
+              },
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+            }
+          );
+
+          console.log("Response received from Roboflow:", response.data);
+          setResult(JSON.stringify(response.data.predictions, null, 2));
+        };
+        reader.readAsDataURL(file);
+      }
     } catch (error) {
       console.error("Error sending image to Roboflow:", error);
       setResult("Error: " + error.message);
