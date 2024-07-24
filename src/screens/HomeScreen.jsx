@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
-import introImage from "../assets/intro.png";
 import { Link } from "react-router-dom";
+import introImage from "../assets/intro.png";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading delay
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="bg-gray-900 min-h-screen flex items-center justify-center px-4">
+    <div className="bg-gray-900 min-h-screen flex items-center justify-center px-4 mt-10">
       {loading ? (
         <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-4 max-sm:mt-20 max-sm:pt-20">
           <div className="w-full lg:w-1/2 text-center lg:text-left">

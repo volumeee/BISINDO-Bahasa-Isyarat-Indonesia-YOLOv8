@@ -10,7 +10,6 @@ export default function AboutScreen() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulasi loading delay
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
@@ -99,9 +98,10 @@ export default function AboutScreen() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      Langkah 1:
+                      Unggah Video atau Gambar:
                     </strong>{" "}
-                    Buka aplikasi BISINDO dan navigasi ke bagian deteksi objek.
+                    Pilih media yang ingin Anda analisis dengan mengunggahnya
+                    melalui antarmuka kami yang mudah digunakan.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -111,9 +111,10 @@ export default function AboutScreen() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      Langkah 2:
+                      Analisis Keamanan:
                     </strong>{" "}
-                    Izinkan akses kamera saat diminta.
+                    Semua data yang diunggah diproses secara aman dan dijaga
+                    kerahasiaannya. Kami menghargai privasi Anda.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -123,62 +124,17 @@ export default function AboutScreen() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      Langkah 3:
+                      Hasil Cepat:
                     </strong>{" "}
-                    Posisikan tangan Anda di depan kamera untuk mulai mendeteksi
-                    gerakan.
+                    Dalam beberapa detik, platform kami akan memberikan hasil
+                    deteksi objek yang akurat, menampilkan terjemahan bahasa
+                    isyarat.
                   </span>
                 </li>
               </ul>
               <p className="mt-8">
-                Teknologi deteksi objek kami akan menerjemahkan gerakan yang
-                dikenali menjadi teks secara waktu nyata, membuat komunikasi
-                menjadi mulus dan mudah diakses.
-              </p>
-              <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
-                Pembuat
-              </h2>
-              <div className="p-4 bg-gray-100 rounded-lg shadow-lg mt-5">
-                <div className="flex items-center gap-x-4">
-                  <div className="h-16 w-16 overflow-hidden rounded-lg border border-gray-300">
-                    <img
-                      className="h-full w-full object-cover"
-                      src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f468-200d-1f393.png"
-                      alt="Profil Pembuat"
-                    />
-                  </div>
-                  <div className="">
-                    <h3 className=" text-gray-900">
-                      Nama:
-                      <span className="ml-2 text-gray-600">Jane Doe</span>
-                    </h3>
-                    <p className="text-gray-900">
-                      NIM:
-                      <span className="ml-2 text-gray-600">12345678</span>
-                    </p>
-                    <p className="text-gray-900">
-                      Jurusan:
-                      <span className="ml-2 text-gray-600">Ilmu Komputer</span>
-                    </p>
-                    <p className="text-gray-900">
-                      Fakultas:
-                      <span className="ml-2 text-gray-600">
-                        Fakultas Teknologi Informasi
-                      </span>
-                    </p>
-                    <p className="text-gray-900">
-                      Judul Penelitian:
-                      <span className="ml-2 text-gray-600">
-                        Deteksi Objek untuk Bahasa Isyarat Indonesia
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <p className="mt-8">
-                “Guard well your thoughts when alone and your words when
-                accompanied.”
-                <span className="font-semibold text-sm">― Roy T. Bennett</span>
+                Kami berdedikasi untuk terus meningkatkan teknologi kami untuk
+                memberikan pengalaman belajar yang terbaik bagi semua pengguna.
               </p>
             </div>
           </div>

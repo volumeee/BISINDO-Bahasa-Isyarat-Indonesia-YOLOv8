@@ -12,18 +12,13 @@ function CaptureScreen() {
   const canvasRef = useRef(null);
   const [aspectRatio, setAspectRatio] = useState(16 / 9);
 
-  // change aspect ratio
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 600) {
-        setAspectRatio(4 / 5); // Atur rasio aspek untuk layar kecil
-      } else {
-        setAspectRatio(16 / 9); // Atur rasio aspek untuk layar besar
-      }
+      setAspectRatio(window.innerWidth <= 600 ? 4 / 5 : 16 / 9);
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Setel rasio aspek saat komponen di-mount
+    handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -41,9 +36,7 @@ function CaptureScreen() {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-  const openCamera = () => {
-    setCameraActive(true);
-  };
+  const openCamera = () => setCameraActive(true);
 
   const takePhoto = async () => {
     const photo = await camera.current.takePhoto();
@@ -54,51 +47,26 @@ function CaptureScreen() {
 
   const sendImageToRoboflow = async (file) => {
     try {
-      console.log("Sending image to Roboflow");
+      const base64String =
+        typeof file === "string"
+          ? file.replace("data:", "").replace(/^.+,/, "")
+          : await new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onloadend = () =>
+                resolve(reader.result.replace("data:", "").replace(/^.+,/, ""));
+              reader.readAsDataURL(file);
+            });
 
-      if (typeof file === "string") {
-        const base64String = file.replace("data:", "").replace(/^.+,/, "");
+      const response = await axios.post(
+        "https://detect.roboflow.com/bisindo-hiiig/2",
+        base64String,
+        {
+          params: { api_key: "4iTfTnpJ1cUUR9GGZvDV" },
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        }
+      );
 
-        const response = await axios.post(
-          "https://detect.roboflow.com/bisindo-hiiig/2",
-          base64String,
-          {
-            params: {
-              api_key: "4iTfTnpJ1cUUR9GGZvDV",
-            },
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-
-        console.log("Response received from Roboflow:", response.data);
-        setResult(response.data.predictions);
-      } else {
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-          const base64String = reader.result
-            .replace("data:", "")
-            .replace(/^.+,/, "");
-
-          const response = await axios.post(
-            "https://detect.roboflow.com/bisindo-hiiig/2",
-            base64String,
-            {
-              params: {
-                api_key: "4iTfTnpJ1cUUR9GGZvDV",
-              },
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-            }
-          );
-
-          console.log("Response received from Roboflow:", response.data);
-          setResult(response.data.predictions);
-        };
-        reader.readAsDataURL(file);
-      }
+      setResult(response.data.predictions);
     } catch (error) {
       console.error("Error sending image to Roboflow:", error);
       setResult([]);
@@ -112,43 +80,30 @@ function CaptureScreen() {
       const img = new Image();
       img.src = image;
 
-      // Variabel untuk penyesuaian mudah
-      const fontSize = 40; // Ukuran font dalam piksel
-      const labelPadding = 16; // Padding di sekitar teks label dalam piksel
-      const boxColor = "purple"; // Warna untuk bounding box dan teks
-      const boxAlpha = 0.3; // Transparansi untuk bounding box
-
       img.onload = () => {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
 
-        result.forEach((prediction) => {
-          const { x, y, width, height, class: label, confidence } = prediction;
+        result.forEach(({ x, y, width, height, class: label, confidence }) => {
           const xMin = x - width / 2;
           const yMin = y - height / 2;
+          const fontSize = 40;
+          const labelPadding = 16;
+          const boxColor = "purple";
+          const boxAlpha = 0.3;
 
-          // Set font size
           ctx.font = `${fontSize}px Arial`;
-
-          // Draw bounding box with transparency
           ctx.beginPath();
           ctx.rect(xMin, yMin, width, height);
           ctx.lineWidth = 5;
           ctx.strokeStyle = boxColor;
           ctx.stroke();
-
-          // Set global alpha for transparency
           ctx.globalAlpha = boxAlpha;
-
-          // Draw bounding box fill
           ctx.fillStyle = boxColor;
           ctx.fillRect(xMin, yMin, width, height);
-
-          // Reset global alpha to 1 for subsequent drawing
           ctx.globalAlpha = 1;
 
-          // Draw label background
           const labelText = `${label} ${Math.round(confidence * 100)}%`;
           const textWidth = ctx.measureText(labelText).width;
           const textHeight = fontSize;
@@ -159,8 +114,6 @@ function CaptureScreen() {
             textWidth + 2 * labelPadding,
             textHeight + labelPadding
           );
-
-          // Draw label text
           ctx.fillStyle = "white";
           ctx.fillText(labelText, xMin + labelPadding, yMin - labelPadding);
         });
@@ -174,15 +127,13 @@ function CaptureScreen() {
       <p className="text-lg text-gray-300 mb-4">Bahasa Isyarat Indonesia</p>
       <div className="w-full max-w-3xl h-96 bg-gray-700 rounded-lg flex items-center justify-center mb-4 overflow-hidden relative">
         {cameraActive ? (
-          <div className="w-full h-full">
-            <Camera
-              ref={camera}
-              numberOfCamerasCallback={setNumberOfCameras}
-              aspectRatio={aspectRatio}
-              videoConstraints={{ facingMode: "environment" }}
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
+          <Camera
+            ref={camera}
+            numberOfCamerasCallback={setNumberOfCameras}
+            aspectRatio={aspectRatio}
+            videoConstraints={{ facingMode: "environment" }}
+            className="w-full h-full object-cover rounded-lg"
+          />
         ) : image ? (
           <>
             <img
@@ -202,14 +153,14 @@ function CaptureScreen() {
       <div className="flex space-x-4 mb-4">
         <button
           onClick={openCamera}
-          className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition ease-in-out delay-150 hover:scale-110"
+          className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 transition ease-in-out duration-300 transform hover:scale-105"
         >
           Camera
         </button>
         {!cameraActive && (
           <div
             {...getRootProps()}
-            className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition ease-in-out delay-150 hover:scale-110 cursor-pointer"
+            className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 transition ease-in-out duration-300 transform hover:scale-105 cursor-pointer"
           >
             <input {...getInputProps()} />
             Gallery
@@ -218,7 +169,7 @@ function CaptureScreen() {
         {cameraActive && (
           <button
             onClick={takePhoto}
-            className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition ease-in-out delay-150 hover:scale-110"
+            className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 transition ease-in-out duration-300 transform hover:scale-105"
           >
             Snap
           </button>
@@ -226,7 +177,7 @@ function CaptureScreen() {
         {cameraActive && numberOfCameras > 1 && (
           <button
             onClick={() => camera.current.switchCamera()}
-            className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition ease-in-out delay-150 hover:scale-110"
+            className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 transition ease-in-out duration-300 transform hover:scale-105"
           >
             Switch Camera
           </button>

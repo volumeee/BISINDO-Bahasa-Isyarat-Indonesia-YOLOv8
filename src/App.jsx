@@ -25,18 +25,16 @@ function PageTransitions() {
   const location = useLocation();
 
   return (
-    <div style={{ position: "relative", height: "100vh" }}>
-      <TransitionGroup>
-        <CSSTransition key={location.key} classNames="fade" timeout={300}>
-          <Routes location={location}>
-            <Route path="/" element={<HomeScreen />} />
-            <Route path="/about" element={<AboutScreen />} />
-            <Route path="/reference" element={<ReferenceScreen />} />
-            <Route path="/bisindo" element={<CaptureScreen />} />
-          </Routes>
-        </CSSTransition>
-      </TransitionGroup>
-    </div>
+    <TransitionGroup>
+      <CSSTransition key={location.key} classNames="fade" timeout={300}>
+        <Routes location={location}>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/about" element={<AboutScreen />} />
+          <Route path="/reference" element={<ReferenceScreen />} />
+          <Route path="/bisindo" element={<CaptureScreen />} />
+        </Routes>
+      </CSSTransition>
+    </TransitionGroup>
   );
 }
 
