@@ -6,6 +6,7 @@ import axios from "axios";
 function CaptureScreen() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false); // Tambahkan state loading
   const camera = useRef(null);
   const [cameraActive, setCameraActive] = useState(false);
   const [numberOfCameras, setNumberOfCameras] = useState(0);
@@ -29,7 +30,9 @@ function CaptureScreen() {
     reader.onload = async () => {
       const fileUrl = reader.result;
       setImage(fileUrl);
+      setLoading(true); // Set loading to true
       await sendImageToRoboflow(file);
+      setLoading(false); // Set loading to false after response
     };
     reader.readAsDataURL(file);
   };
@@ -42,7 +45,9 @@ function CaptureScreen() {
     const photo = await camera.current.takePhoto();
     setImage(photo);
     setCameraActive(false);
-    sendImageToRoboflow(photo);
+    setLoading(true); // Set loading to true
+    await sendImageToRoboflow(photo);
+    setLoading(false); // Set loading to false after response
   };
 
   const sendImageToRoboflow = async (file) => {
@@ -183,10 +188,23 @@ function CaptureScreen() {
           </button>
         )}
       </div>
-      <p className="text-lg text-white mb-2">Detection Results</p>
-      <div className="text-4xl font-bold border-2 border-gray-400 p-4 rounded text-white">
-        <pre>{JSON.stringify(result, null, 2)}</pre>
-      </div>
+      {loading ? ( // Tampilkan indikator loading
+        <div className="text-white text-lg">Loading...</div>
+      ) : (
+        <>
+          <p className="text-lg text-white mb-2">Detection Results</p>
+          <div className="w-full flex flex-col md:flex-row">
+            <div className="w-full md:w-1/2 text-2xl md:text-9xl sm:text-sm font-bold border-2 border-gray-400 p-4 rounded text-white mb-4 md:mb-0 overflow-auto flex flex-col items-center justify-center space-y-2">
+              {result.map((res, index) => (
+                <p key={index}>{res.class}</p>
+              ))}
+            </div>
+            <div className="w-full md:w-1/2 text-sm md:text-sm font-bold border-2 border-gray-400 p-4 rounded text-white overflow-auto">
+              <pre>{JSON.stringify(result, null, 2)}</pre>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

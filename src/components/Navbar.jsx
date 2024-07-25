@@ -9,6 +9,7 @@ function Navbar() {
   const handleMenuItemClick = () => {
     setMobileMenuOpen(false);
   };
+
   return (
     <header className="bg-white fixed top-0 left-0 w-full z-50 shadow-md">
       <nav
@@ -71,14 +72,12 @@ function Navbar() {
           className="fixed inset-0 z-50 overflow-y-auto bg-white px-6 py-6 lg:hidden"
         >
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                alt=""
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-              />
-            </a>
+            <div className="flex lg:flex-1">
+              <Link to="/" className="-m-1.5 p-1.5">
+                <span className="sr-only">Your Company</span>
+                <img alt="logo" src={logoImage} className="h-8 w-auto" />
+              </Link>
+            </div>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}

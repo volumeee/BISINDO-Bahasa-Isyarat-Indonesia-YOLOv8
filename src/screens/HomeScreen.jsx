@@ -20,8 +20,8 @@ export default function HomeScreen() {
             </h2>
             <p className="mt-6 text-lg text-gray-300">
               BISINDO adalah platform belajar Bahasa Isyarat Indonesia dengan
-              teknologi deteksi objek YOLO v8. Akses berbagai materi untuk semua
-              tingkatan dan ciptakan komunikasi inklusif bersama kami.
+              teknologi deteksi objek YOLO v8. Akses fitur deteksi dan ciptakan
+              komunikasi inklusif bersama kami.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-start justify-start gap-6 max-[768px]:items-center max-[768px]:justify-center">
               <Link
@@ -43,15 +43,15 @@ export default function HomeScreen() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-4  max-sm:mt-20 max-sm:pt-20">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-4 max-sm:mt-20 max-sm:pt-20">
           <div className="w-full lg:w-1/2 text-center lg:text-left">
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Komunikasi Tanpa Batas dengan Bahasa Isyarat Indonesia
             </h2>
             <p className="mt-6 text-lg text-gray-300">
               BISINDO adalah platform belajar Bahasa Isyarat Indonesia dengan
-              teknologi deteksi objek YOLO v8. Akses berbagai materi untuk semua
-              tingkatan dan ciptakan komunikasi inklusif bersama kami.
+              teknologi deteksi objek YOLO v8. Akses fitur deteksi dan ciptakan
+              komunikasi inklusif bersama kami.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-start justify-start gap-6 max-[768px]:items-center max-[768px]:justify-center">
               <Link

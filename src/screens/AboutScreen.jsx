@@ -83,7 +83,7 @@ export default function AboutScreen() {
           <div className="lg:pr-4">
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
               <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-                Cara Menggunakan Deteksi Objek
+                Langkah-langkah Menggunakan Deteksi Objek
               </h2>
               <p className="mt-6">
                 Platform kami menggunakan teknologi deteksi objek canggih untuk
@@ -98,10 +98,9 @@ export default function AboutScreen() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      Unggah Video atau Gambar:
+                      Langkah 1:
                     </strong>{" "}
-                    Pilih media yang ingin Anda analisis dengan mengunggahnya
-                    melalui antarmuka kami yang mudah digunakan.
+                    Buka aplikasi BISINDO dan navigasi ke bagian deteksi objek.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -111,10 +110,9 @@ export default function AboutScreen() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      Analisis Keamanan:
+                      Langkah 2:
                     </strong>{" "}
-                    Semua data yang diunggah diproses secara aman dan dijaga
-                    kerahasiaannya. Kami menghargai privasi Anda.
+                    Izinkan akses kamera saat diminta.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -124,11 +122,10 @@ export default function AboutScreen() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      Hasil Cepat:
+                      Langkah 3:
                     </strong>{" "}
-                    Dalam beberapa detik, platform kami akan memberikan hasil
-                    deteksi objek yang akurat, menampilkan terjemahan bahasa
-                    isyarat.
+                    Posisikan tangan Anda di depan kamera untuk mulai mendeteksi
+                    gerakan.
                   </span>
                 </li>
               </ul>
