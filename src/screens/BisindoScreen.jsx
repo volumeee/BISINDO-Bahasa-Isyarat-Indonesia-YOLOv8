@@ -68,7 +68,7 @@ export default function CaptureScreen() {
             });
 
       const response = await axios.post(
-        "https://detect.roboflow.com/bisindo-hiiig/3",
+        "https://detect.roboflow.com/bisindo-hiiig/4",
         base64String,
         {
           params: { api_key: "4iTfTnpJ1cUUR9GGZvDV" },
