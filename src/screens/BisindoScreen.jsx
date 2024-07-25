@@ -12,6 +12,7 @@ export default function CaptureScreen() {
   const [numberOfCameras, setNumberOfCameras] = useState(0);
   const canvasRef = useRef(null);
   const [aspectRatio, setAspectRatio] = useState(16 / 9);
+  const [imageSelected, setImageSelected] = useState(false); // New state
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,6 +35,7 @@ export default function CaptureScreen() {
       setLoading(true);
       await sendImageToRoboflow(file);
       setLoading(false);
+      setImageSelected(true); // Set imageSelected to true
     };
     reader.readAsDataURL(file);
   };
@@ -50,6 +52,7 @@ export default function CaptureScreen() {
     setLoading(true);
     await sendImageToRoboflow(photo);
     setLoading(false);
+    setImageSelected(true); // Set imageSelected to true
   };
 
   const sendImageToRoboflow = async (file) => {
@@ -197,7 +200,7 @@ export default function CaptureScreen() {
         <>
           <p className="text-lg text-white mb-2">Detection Results</p>
           <div className="w-full flex flex-col md:flex-row">
-            {result.length === 0 ? (
+            {result.length === 0 && imageSelected ? (
               <div className="w-full text-center text-lg text-red-500">
                 gagal deteksi, pastikan hasil foto sesuai dan bagus, coba lagi
               </div>
