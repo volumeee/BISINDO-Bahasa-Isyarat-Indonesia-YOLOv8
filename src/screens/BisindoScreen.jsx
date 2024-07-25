@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { Camera } from "react-camera-pro";
 import axios from "axios";
 
-function CaptureScreen() {
+export default function CaptureScreen() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(false); // Tambahkan state loading
@@ -156,12 +156,14 @@ function CaptureScreen() {
         )}
       </div>
       <div className="flex space-x-4 mb-4">
-        <button
-          onClick={openCamera}
-          className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 transition ease-in-out duration-300 transform hover:scale-105"
-        >
-          Camera
-        </button>
+        {!cameraActive && (
+          <button
+            onClick={openCamera}
+            className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 transition ease-in-out duration-300 transform hover:scale-105"
+          >
+            Camera
+          </button>
+        )}
         {!cameraActive && (
           <div
             {...getRootProps()}
@@ -208,5 +210,3 @@ function CaptureScreen() {
     </div>
   );
 }
-
-export default CaptureScreen;

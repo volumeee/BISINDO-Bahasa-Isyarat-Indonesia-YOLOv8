@@ -4,32 +4,151 @@ export default function ReferenceScreen() {
   const [loading, setLoading] = useState(true);
   const references = [
     {
-      title: "Understanding Sign Language Recognition: An Overview",
-      authors: "John Doe, Jane Smith",
-      journal: "Journal of Sign Language Studies",
-      year: 2021,
-      link: "https://example.com/reference1",
-    },
-    {
-      title: "Advancements in Object Detection for Sign Language",
-      authors: "Alice Johnson, Bob Brown",
-      journal: "International Journal of Computer Vision",
+      title: "Tuna wicara biasanya diikuti dengan kelainan lainnya",
+      authors: "Pemerintahan Kota Surakarta",
+      journal: "Surakarta Government Website",
       year: 2022,
-      link: "https://example.com/reference2",
+      link: "https://surakarta.go.id/?p=28196",
     },
     {
-      title: "Integrating AI in Sign Language Translation Systems",
-      authors: "Charlie Davis, Diana Evans",
-      journal: "IEEE Transactions on Neural Networks",
-      year: 2020,
-      link: "https://example.com/reference3",
+      title: "Bahasa Isyarat Indonesia adalah bentuk komunikasi manual",
+      authors: "D. Rina, F. Fauziah, and N. Hayati",
+      journal: "",
+      year: 2021,
+      link: "",
     },
     {
-      title: "Integrating AI in Sign Language Translation Systems",
-      authors: "Charlie Davis, Diana Evans",
-      journal: "IEEE Transactions on Neural Networks",
+      title: "Platform mengenai pembelajaran pengenalan huruf",
+      authors: "I.P. Sari, Salamun, and Sukri",
+      journal: "",
+      year: 2021,
+      link: "",
+    },
+    {
+      title:
+        "Analisis dan Perancangan Kamus Interaktif Bahasa Isyarat Indonesia dengan Speech Recognition",
+      authors: "Z. Amrullah and K. E. Saputro",
+      journal: "J. Bumigora Inf. Technol.",
+      year: 2019,
+      link: "https://doi.org/10.30812/bite.v1i2.604",
+    },
+    {
+      title:
+        "Aplikasi Spoxtech Untuk Penyandang Tuna Rungu – Wicara Menggunakan Algoritma Hidden Markov Model dan Metode Finite State Automata (FSA)",
+      authors: "D. Rina, F. Fauziah, and N. Hayati",
+      journal: "STRING (Satuan Tulisan Ris. dan Inov. Teknol.)",
+      year: 2021,
+      link: "https://doi.org/10.30998/string.v5i3.7690",
+    },
+    {
+      title:
+        "Indonesian Sign Language Recognition using Convolutional Neural Network and Fingertip Detection",
+      authors: "Siahaan, U., Suhendra, A., & Handrizal",
+      journal: "Jurnal Ilmu Komputer dan Informasi",
+      year: 2022,
+      link: "https://doi.org/10.21609/jiki.v15i1.1115",
+    },
+    {
+      title:
+        "Real-Time Indonesian Sign Language Recognition with Deep Learning and MediaPipe",
+      authors: "Nugroho, S. P., Akbar, M. A., & Sunarya, U.",
+      journal:
+        "International Conference on Information and Communications Technology (ICOIACT)",
+      year: 2021,
+      link: "",
+    },
+    {
+      title:
+        "Pendidikan dan Pengembangan Keterampilan bagi Penyandang Tuna Rungu Wicara: Tantangan dan Peluang",
+      authors: "Wulandari, R., & Budiyanto, B.",
+      journal: "Jurnal Pendidikan Inklusi",
+      year: 2022,
+      link: "",
+    },
+    {
+      title:
+        "Strategi Komunikasi bagi Penyandang Tuna Rungu Wicara dalam Interaksi Sosial",
+      authors: "Sari, D. P., & Darmawan, D.",
+      journal: "Jurnal Ilmiah Komunikasi",
+      year: 2022,
+      link: "",
+    },
+    {
+      title:
+        "Bahasa Isyarat sebagai Media Komunikasi bagi Penyandang Tuna Rungu Wicara",
+      authors: "Rahayu, S., & Hermawati, D.",
+      journal: "Jurnal Pendidikan Bahasa dan Sastra",
+      year: 2022,
+      link: "",
+    },
+    {
+      title:
+        "Peran Bahasa Isyarat dalam Komunikasi dan Pendidikan bagi Penyandang Tuna Rungu Wicara",
+      authors: "Pratama, A. R., & Susilawati, S.",
+      journal: "Jurnal Pendidikan Bahasa dan Sastra Indonesia",
+      year: 2021,
+      link: "",
+    },
+    {
+      title: "Pengenalan Handpose untuk Aplikasi Augmented Reality",
+      authors: "Pratama, A. R., & Widyawan, W.",
+      journal: "Jurnal Teknologi Informasi dan Ilmu Komputer",
+      year: 2021,
+      link: "",
+    },
+    {
+      title: "Pengenalan Fingerpose untuk Aplikasi Penerjemah Bahasa Isyarat",
+      authors: "Sari, D. P., & Wibowo, A. T.",
+      journal: "Jurnal Teknik Informatika",
+      year: 2021,
+      link: "",
+    },
+    {
+      title:
+        "Penerapan TensorFlow untuk Pengenalan Handpose dan Fingerpose dalam Bahasa Isyarat",
+      authors: "Nugroho, S. P., & Sunarya, U.",
+      journal: "Jurnal Teknologi Informasi dan Ilmu Komputer",
+      year: 2022,
+      link: "",
+    },
+    {
+      title:
+        "Studi literatur dilakukan dengan mengkaji jurnal, artikel penelitian",
+      authors: "Ristyawati et al.",
+      journal: "",
       year: 2020,
-      link: "https://example.com/reference3",
+      link: "",
+    },
+    {
+      title:
+        "HandSignDetector: A Hybrid CNN Approach for Hand Gesture Recognition from Complex Backgrounds",
+      authors: "Khubaib Amjad Alam, dkk.",
+      journal: "",
+      year: 2021,
+      link: "",
+    },
+    {
+      title:
+        "Evaluasi Metode Pengajaran Bisindo di Sekolah Luar Biasa: Suatu Studi Kasus",
+      authors: "Prabowo, A., Sunardi, & Iswari, M.",
+      journal: "Jurnal Pendidikan Khusus",
+      year: 2022,
+      link: "",
+    },
+    {
+      title:
+        "Deep Learning untuk Deteksi Objek pada Citra Drone untuk Aplikasi Pertanian Presisi",
+      authors: "Putra, I.G.B.A., & Wirayuda, T.A.B.",
+      journal: "Jurnal Sistem Informasi",
+      year: 2022,
+      link: "",
+    },
+    {
+      title: "Implementasi Metode YOLO pada Deteksi Objek Berbahasa Indonesia",
+      authors: "Ramadhani Djohar, Bayu Priyambadha, dan Riries Rulaningtyas",
+      journal: "",
+      year: 2019,
+      link: "",
     },
   ];
 
