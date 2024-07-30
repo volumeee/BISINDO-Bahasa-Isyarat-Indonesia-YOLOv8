@@ -14,6 +14,9 @@ BISINDO Website adalah aplikasi web untuk belajar bahasa isyarat Indonesia mengg
 - [x] Antarmuka pengguna interaktif menggunakan React JS
 - [x] Sistem navigasi untuk beralih antara berbagai halaman informasi
 
+## Sementara hanya menggunakan model huruf vokal (A,I,U,E,O)
+![A](https://github.com/user-attachments/assets/e3b2caac-adef-4f2f-80db-ed549a7d33db)
+
 ## Demo
 
 [Uploading bisindo_cD7aTWGq.mp4](https://github.com/user-attachments/assets/fb0fc3a3-5d80-4cb1-8b66-89d19d672aa6)
