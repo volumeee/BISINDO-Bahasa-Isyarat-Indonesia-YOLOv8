@@ -1,4 +1,6 @@
 
+https://github.com/user-attachments/assets/fb0fc3a3-5d80-4cb1-8b66-89d19d672aa6
+
 # BISINDO Website
 
 BISINDO Website adalah aplikasi web untuk belajar bahasa isyarat Indonesia menggunakan YOLO v8 untuk deteksi gerakan tangan secara real-time dan React JS untuk membangun antarmuka pengguna.
@@ -9,6 +11,9 @@ BISINDO Website adalah aplikasi web untuk belajar bahasa isyarat Indonesia mengg
 - [x] Deteksi gerakan tangan secara real-time menggunakan YOLO v8
 - [x] Antarmuka pengguna interaktif menggunakan React JS
 - [x] Sistem navigasi untuk beralih antara berbagai halaman informasi
+
+## Demo
+Uploading bisindo_cD7aTWGq.mp4
 
 ## Instalasi
 
