@@ -35,7 +35,7 @@ Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan aplikasi di 
 1. **Clone repository ini:**
 
    ```bash
-   git clone <URL-repository-Anda>
+   git clone https://github.com/volumeee/BISINDO-Bahasa-Isyarat-Indonesia-YOLOv8.git
    cd bisindo-website
    ```
 
@@ -57,7 +57,7 @@ Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan aplikasi di 
 
 ### Halaman Utama
 
-Halaman utama menampilkan informasi tentang BISINDO, tujuan pembelajaran, dan cara menggunakan aplikasi ini.
+Halaman utama menampilkan informasi landing page.
 
 ### Deteksi Gerakan Tangan
 
